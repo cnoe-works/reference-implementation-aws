@@ -104,6 +104,11 @@ spec:
           title: DynamoDBTable configuration options
           type: object
   steps:
+      - id: create-repo
+      name: Create Repository
+      action: github:repo:create
+      input:
+        repoUrl: github.com?repo=${{ parameters.name }}&owner=cnoe-punkwalker
     - id: template
       name: Generating component
       action: fetch:template
@@ -111,6 +116,10 @@ spec:
         url: ./skeleton
         values:
           name: ${{parameters.name}}
+          labels: ${{ parameters.labels }}
+          repoUrl: ${{ parameters.repoUrl }}
+          owner: ${{ parameters.owner }}
+          remoteUrl: ${{ steps['create-repo'].output.remoteUrl }}
     - action: roadiehq:utils:serialize:yaml
       id: serialize
       input:
@@ -127,14 +136,17 @@ spec:
         content: ${{ steps['serialize'].output.serialized }}
         path: kustomize/base/${{ parameters.name }}.yaml
       name: write-to-file
-    - id: publish
-      name: Publishing to a gitea git repository
-      action: publish:gitea
+    - id: init-repo
+      name: Initialize Repository
+      action: github:repo:push
       input:
-        description: This is an example app
-        # Hard coded value for this demo purposes only.
-        repoUrl: cnoe.localtest.me:8443/gitea?repo=${{parameters.name}}
+        repoUrl: github.com?repo=${{ parameters.name }}&owner=cnoe-punkwalker
         defaultBranch: main
+    - id: wait
+      name: Waiting for the repo to be ready
+      action: "roadiehq:utils:sleep"
+      input:
+        amount: 5
     - id: create-argocd-app
       name: Create ArgoCD App
       action: cnoe:create-argocd-app
@@ -144,7 +156,7 @@ spec:
         argoInstance: in-cluster
         projectName: default
         # necessary until we generate our own cert
-        repoUrl: https://cnoe.localtest.me:8443/gitea/giteaAdmin/${{parameters.name}}
+        repoUrl: ${{ steps['create-repo'].output.remoteUrl }}
         path: "kustomize/base"
     - id: register
       name: Register
