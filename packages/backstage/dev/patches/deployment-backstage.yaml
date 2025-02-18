@@ -28,7 +28,7 @@ spec:
                       path: k8s-config.yaml
       containers:
         - name: backstage
-          image: public.ecr.aws/cnoe-io/backstage:v0.0.2
+          image: ghcr.io/cnoe-io/backstage-app:sha256-f96950b9eae5d46a890e16621d2ca3dc6f94eac86b8f6c208bde3eb6b122d78f
           command:
             - node
             - packages/backend
@@ -41,3 +41,9 @@ spec:
           envFrom:
             - secretRef:
                 name: backstage-env-vars
+          env:
+            - name: ARGOCD_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: argocd-initial-admin-secret 
+                  key: password
