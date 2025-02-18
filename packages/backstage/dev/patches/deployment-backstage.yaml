@@ -28,7 +28,7 @@ spec:
                       path: k8s-config.yaml
       containers:
         - name: backstage
-          image: ghcr.io/cnoe-io/backstage-app:sha256-f96950b9eae5d46a890e16621d2ca3dc6f94eac86b8f6c208bde3eb6b122d78f
+          image: ghcr.io/cnoe-io/backstage-app:9232d633b2698fffa6d0a73b715e06640d170162
           command:
             - node
             - packages/backend
