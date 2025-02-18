@@ -147,6 +147,17 @@ spec:
       action: "roadiehq:utils:sleep"
       input:
         amount: 5
+    - id: create-argocd-app
+      name: Create ArgoCD App
+      action: cnoe:create-argocd-app
+      input:
+        appName: ${{parameters.name}}
+        appNamespace: default
+        argoInstance: in-cluster
+        projectName: default
+        # necessary until we generate our own cert
+        repoUrl: ${{ steps['init-repo'].output.repoContentsUrl }}
+        path: "kustomize/base"
     - id: register
       name: Register
       action: catalog:register
