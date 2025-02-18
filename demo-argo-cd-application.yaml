@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-with-s3-2
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/cnoe-punkwalker/app-with-s3-2'
+    path: kustomize/base
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=false
+      - FailOnSharedResource=true
+    retry:
+      limit: 10
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 5m
+  revisionHistoryLimit: 10
