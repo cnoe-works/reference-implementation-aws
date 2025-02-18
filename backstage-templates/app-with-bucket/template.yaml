@@ -156,7 +156,7 @@ spec:
         argoInstance: in-cluster
         projectName: default
         # necessary until we generate our own cert
-        repoUrl: ${{ steps['init-repo'].output.repoContentsUrl }}
+        repoUrl: ${{ steps['init-repo'].output.remoteUrl }}
         path: "kustomize/base"
     - id: register
       name: Register
