@@ -41,9 +41,3 @@ spec:
           envFrom:
             - secretRef:
                 name: backstage-env-vars
-          env:
-            - name: ARGOCD_ADMIN_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: argocd-initial-admin-secret 
-                  key: password
