@@ -104,7 +104,7 @@ spec:
           title: DynamoDBTable configuration options
           type: object
   steps:
-      - id: create-repo
+    - id: create-repo
       name: Create Repository
       action: github:repo:create
       input:
