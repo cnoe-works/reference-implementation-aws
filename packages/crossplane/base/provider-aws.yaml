@@ -18,3 +18,12 @@ spec:
   package: xpkg.upbound.io/upbound/provider-aws-s3:v0.41.0
   controllerConfigRef:
     name: provider-aws-config
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws
+spec:
+  package: xpkg.upbound.io/crossplane-contrib/provider-aws:v0.41.0
+  controllerConfigRef:
+    name: provider-aws-config

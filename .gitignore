@@ -48,3 +48,6 @@ site
 # Checks
 .tfsec
 
+# Custom Files
+git-creds.yaml
+githubApp.yaml
