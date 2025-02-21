@@ -255,7 +255,7 @@ spec:
           labels: ${{ parameters.labels }}
           repoUrl: ${{ parameters.repoUrl }}
           owner: ${{ parameters.owner }}
-          remoteUrl: ${{ steps['create-repo'].output.remoteUrl }}/${{ parameters.name }}
+          remoteUrl: ${{ steps['create-repo'].output.remoteUrl }}
     - action: roadiehq:utils:serialize:yaml
       id: serialize
       input:
@@ -298,8 +298,8 @@ spec:
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: https://github.com/cnoe-punkwalker/${{ parameters.name }}
-        catalogInfoPath: 'catalog-info.yaml'
+        repoContentsUrl: ${{ steps['init-repo'].output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
   output:
     links:
       - title: Open in catalog
