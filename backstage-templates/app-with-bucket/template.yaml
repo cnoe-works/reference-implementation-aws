@@ -255,7 +255,7 @@ spec:
           labels: ${{ parameters.labels }}
           repoUrl: ${{ parameters.repoUrl }}
           owner: ${{ parameters.owner }}
-          remoteUrl: ${{ steps['create-repo'].output.remoteUrl }}
+          remoteUrl: ${{ steps['create-repo'].output.remoteUrl }}/${{ parameters.name }}
     - action: roadiehq:utils:serialize:yaml
       id: serialize
       input:
@@ -292,13 +292,13 @@ spec:
         argoInstance: in-cluster
         projectName: default
         # necessary until we generate our own cert
-        repoUrl: https://github.com/cnoe-punkwalker/${{ parameters.name }}
+        repoUrl: ${{ steps['create-repo'].output.remoteUrl }}/${{ parameters.name }}
         path: "kustomize/base"
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps['create-repo'].output.remoteUrl }}
+        repoContentsUrl: ${{ steps['create-repo'].output.remoteUrl }}/${{ parameters.name }}
         catalogInfoPath: 'catalog-info.yaml'
   output:
     links:
