@@ -21,7 +21,7 @@ spec:
         - containerPort: 8080
         env:
         - name: ECHO_INCLUDE_ENV_VARS
-          value: 1
+          value: "1"
         envFrom:
         - secretRef:
             name: connection-secret
@@ -48,12 +48,11 @@ spec:
   rules:
   - host: test-app.advaitt.people.aws.dev
     http:
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: echoserver
-                port:
-                  number: 80
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: echoserver
+              port:
+                number: 80
