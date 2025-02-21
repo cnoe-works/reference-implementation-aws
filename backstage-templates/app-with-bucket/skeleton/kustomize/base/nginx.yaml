@@ -24,7 +24,7 @@ spec:
           value: 1
         envFrom:
         - secretRef:
-            name: app-secret
+            name: connection-secret
 ---
 apiVersion: v1
 kind: Service
