@@ -50,4 +50,4 @@ spec:
               service:
                 name: echoserver
                 port:
-                  number: https
+                  number: 80
