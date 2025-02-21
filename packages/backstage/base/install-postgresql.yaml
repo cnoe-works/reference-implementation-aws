@@ -23,7 +23,7 @@ metadata:
     app: postgresql
 spec:
   serviceName: service-postgresql
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: postgresql
