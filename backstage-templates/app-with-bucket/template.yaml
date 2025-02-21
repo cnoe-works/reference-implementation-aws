@@ -292,13 +292,13 @@ spec:
         argoInstance: in-cluster
         projectName: default
         # necessary until we generate our own cert
-        repoUrl: ${{ steps['create-repo'].output.remoteUrl }}/${{ parameters.name }}
+        repoUrl: https://github.com/cnoe-punkwalker/${{ parameters.name }}
         path: "kustomize/base"
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps['create-repo'].output.remoteUrl }}/${{ parameters.name }}
+        repoContentsUrl: https://github.com/cnoe-punkwalker/${{ parameters.name }}
         catalogInfoPath: 'catalog-info.yaml'
   output:
     links:
