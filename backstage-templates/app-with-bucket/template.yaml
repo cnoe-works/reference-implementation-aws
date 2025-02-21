@@ -298,7 +298,7 @@ spec:
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps['init-repo'].output.remoteUrl }}/${{ parameters.name }}
+        repoContentsUrl: ${{ steps['create-repo'].output.remoteUrl }}/${{ parameters.name }}
         catalogInfoPath: 'catalog-info.yaml'
   output:
     links:
