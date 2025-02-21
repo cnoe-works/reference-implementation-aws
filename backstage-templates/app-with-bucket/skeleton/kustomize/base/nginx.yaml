@@ -19,6 +19,12 @@ spec:
         image: mendhak/http-https-echo:35
         ports:
         - containerPort: 8080
+        env:
+        - name: ECHO_INCLUDE_ENV_VARS
+          value: 1
+        envFrom:
+        - secretRef:
+            name: app-secret
 ---
 apiVersion: v1
 kind: Service
