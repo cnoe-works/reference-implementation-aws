@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: echoserver
+  name: ${{ values.name }}
   labels:
-    app: echoserver
+    app: ${{ values.name }}
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: echoserver
+      app: ${{ values.name }}
   template:
     metadata:
       labels:
-        app: echoserver
+        app: ${{ values.name }}
     spec:
       containers:
-      - name: echoserver
+      - name: ${{ values.name }}
         image: mendhak/http-https-echo:35
         ports:
         - containerPort: 8080
@@ -29,30 +29,36 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: echoserver
+  name: ${{ values.name }}
   labels:
-    app: echoserver
+    app: ${{ values.name }}
 spec:
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: echoserver
+    app: ${{ values.name }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: echoserver-ingress
+  name: ${{ values.name }}
+  annotations:
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - ${{ values.name }}.advaitt.people.aws.dev
+      secretName: ${{ values.name }}-prod-tls
   rules:
-  - host: test-app.advaitt.people.aws.dev
+  - host: ${{ values.name }}.advaitt.people.aws.dev
     http:
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: echoserver
+              name: ${{ values.name }}
               port:
                 number: 80
