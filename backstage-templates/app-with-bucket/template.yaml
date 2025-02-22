@@ -21,8 +21,16 @@ spec:
             type: string
           description: Labels to apply to the application
           ui:autofocus: true
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
       required:
         - name
+        - repoUrl
       title: Choose your repository location
     - description: Configure your DynamoDB table
       properties:
@@ -244,7 +252,7 @@ spec:
       name: Create Repository
       action: github:repo:create
       input:
-        repoUrl: github.com?repo=${{ parameters.name }}&owner=cnoe-punkwalker
+        repoUrl: ${{ parameters.repoUrl }}
     - id: template
       name: Generating component
       action: fetch:template
@@ -276,7 +284,7 @@ spec:
       name: Initialize Repository
       action: github:repo:push
       input:
-        repoUrl: github.com?repo=${{ parameters.name }}&owner=cnoe-punkwalker
+        repoUrl: ${{ parameters.repoUrl }}
         defaultBranch: main
     - id: wait
       name: Waiting for the repo to be ready
