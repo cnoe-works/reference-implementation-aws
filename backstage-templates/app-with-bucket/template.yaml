@@ -266,6 +266,7 @@ spec:
           repoUrl: ${{ parameters.repoUrl }}
           owner: ${{ parameters.owner }}
           remoteUrl: ${{ steps['create-repo'].output.remoteUrl }}
+          secretName: ${{parameters.config.writeConnectionSecretToRef.name}}
     - action: roadiehq:utils:serialize:yaml
       id: serialize
       input:
