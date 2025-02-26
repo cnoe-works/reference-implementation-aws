@@ -7,6 +7,7 @@ export POSTGRES_PASSWORD=${1}
 export BACKSTAGE_DOMAIN_NAME=${2}
 export KEYCLOAK_DOMAIN_NAME=${3}
 export ARGO_WORKFLOWS_DOMAIN_NAME=${4}
+export ARGO_CD_DOMAIN_NAME=${5}
 export GITHUB_APP_YAML_INDENTED=$(cat ${REPO_ROOT}/private/github-integration.yaml | base64 | sed 's/^/    /')
 
 kubectl wait --for=jsonpath=.status.health.status=Healthy -n argocd application/keycloak
