@@ -1,5 +1,6 @@
 namespace: crossplane-system
 resources:
-  - https://github.com/awslabs/crossplane-on-eks/compositions/upbound-aws-provider/s3
+  - resources/s3/definition.yaml
+  - resources/s3/general-purpose.yaml
   - resources/dynamodb/definition.yaml
   - resources/dynamodb/on-demand-composite-key.yaml
