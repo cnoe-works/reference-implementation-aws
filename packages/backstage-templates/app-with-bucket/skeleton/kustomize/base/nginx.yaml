@@ -68,10 +68,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - ${{ values.name }}.advaitt.people.aws.dev
+        - ${{ values.name }}.BASE_DOMAIN_NAME
       secretName: ${{ values.name }}-prod-tls
   rules:
-  - host: ${{ values.name }}.advaitt.people.aws.dev
+  - host: ${{ values.name }}.BASE_DOMAIN_NAME
     http:
       paths:
         - path: /

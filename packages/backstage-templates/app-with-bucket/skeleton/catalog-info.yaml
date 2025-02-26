@@ -20,7 +20,7 @@ metadata:
     backstage.io/kubernetes-namespace: default
     argocd/app-name: ${{values.name | dump}}
   links:
-    - url: https://cnoe.localtest.me:8443/gitea
+    - url: GITHUB_ORG/${{values.name | dump}}
       title: Repo URL
       icon: github
 spec:
@@ -39,7 +39,7 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:.
   links:
-    - url: https://github.com/cnoe-io/stacks/tree/main/ref-implementation
+    - url: GITHUB_URL
       title: CNOE Repo
       icon: github
 spec:
