@@ -14,7 +14,7 @@ metadata:
     apache-spark.cnoe.io/label-selector: env=dev,entity-id=${{values.name}}
     apache-spark.cnoe.io/cluster-name: local
   links:
-    - url: GITHUB_ORG
+    - url: https://github.com/cnoe-punkwalker
       title: Repo URL
       icon: github
 spec:
@@ -31,7 +31,7 @@ metadata:
   annotations:
     backstage.io/techdocs-ref: dir:.
   links:
-    - url: GITHUB_URL
+    - url: https://github.com/cnoe-punkwalker/reference-implementation-aws
       title: CNOE Repo
       icon: github
 spec:

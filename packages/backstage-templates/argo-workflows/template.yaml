@@ -35,7 +35,7 @@ spec:
       input:
         description: This is an example app
         # Hard coded value for this demo purposes only.
-        repoUrl: GITHUB_ORG/${{parameters.name}}
+        repoUrl: https://github.com/cnoe-punkwalker/${{parameters.name}}
         defaultBranch: main
     - id: create-argocd-app
       name: Create ArgoCD App
@@ -46,7 +46,7 @@ spec:
         argoInstance: in-cluster
         projectName: default
         # necessary until we generate our own cert
-        repoUrl: GITHUB_ORG/${{parameters.name}}
+        repoUrl: https://github.com/cnoe-punkwalker/${{parameters.name}}
         path: "manifests"
     - id: register
       name: Register

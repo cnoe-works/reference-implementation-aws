@@ -138,7 +138,7 @@ spec:
         argoInstance: in-cluster
         projectName: default
         # necessary until we generate our own cert
-        repoUrl: GITHUB_ORG/${{ parameters.name }}
+        repoUrl: https://github.com/cnoe-punkwalker/${{ parameters.name }}
         path: "kustomize/base"
     - id: register
       name: Register
